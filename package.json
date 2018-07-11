@@ -1,0 +1,29 @@
+{
+  "name": "afcfc-backend",
+  "version": "1.0.0",
+  "description": "Express App for managing afc-fancenter routes",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.0",
+    "mongoose": "^5.0.12",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^9.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akshaykulkarni2007/afcfc-backend.git"
+  },
+  "author": "Akshay Kulkarni",
+  "license": "ISC"
+}
