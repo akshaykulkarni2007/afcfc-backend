@@ -2,10 +2,11 @@ const express = require("express")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 const passport = require("passport")
-const cors = require('cors')
+const cors = require("cors")
 
 // Routes
 const users = require("./routes/api/users")
+const players = require("./routes/api/players")
 
 const app = express()
 
@@ -32,6 +33,7 @@ app.use(cors())
 
 // Use Routes
 app.use("/api/users", users)
+app.use("/api/players", players)
 
 const port = process.env.PORT || 5000
 
