@@ -10,12 +10,27 @@ const Player = require("../../models/Player")
 router.get("/test", (req, res) => res.json({ msg: "players works" }))
 
 // @route   GET api/players
-// @desc    Get player
+// @desc    Get all players
 // @access  Public
 router.get("/", (req, res) => {
 	Player.find({}, (err, players) => {
 		if (!err) {
 			res.send(players)
+		} else {
+			res.status(400)
+		}
+	})
+})
+
+// @route   GET api/players/name
+// @desc    Get player by name
+// @access  Public
+router.get("/:name", (req, res) => {
+	const name = req.params.name
+	//console.log(req.query, req.params)
+	Player.find({ name }, (err, player) => {
+		if (!err) {
+			res.send(player)
 		} else {
 			res.status(400)
 		}
