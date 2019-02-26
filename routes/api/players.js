@@ -49,7 +49,8 @@ router.post("/add", (req, res) => {
 		from: req.body.from,
 		nationality: req.body.nationality,
 		position: req.body.position,
-		description: req.body.description
+		description: req.body.description,
+		dp: req.body.dp
 	})
 
 	player

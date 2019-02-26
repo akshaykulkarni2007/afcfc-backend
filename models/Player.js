@@ -36,6 +36,10 @@ const PlayerSchema = new Schema({
 		type: String,
 		required: true
 	},
+	dp: {
+		type: String,
+		required: true
+	},
 	stats: { type: Array, default: [] },
 	gallery: [String]
 })
