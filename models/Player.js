@@ -7,7 +7,7 @@ const PlayerSchema = new Schema({
 		required: true
 	},
 	number: {
-		type: String,
+		type: Number,
 		required: true
 	},
 	status: {

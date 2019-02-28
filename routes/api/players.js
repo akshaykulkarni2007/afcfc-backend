@@ -22,12 +22,28 @@ router.get("/", (req, res) => {
 	})
 })
 
+// @route   GET api/players/topStats
+// @desc    Get top stats from players
+// @access  Admin
+router.get("/topStats", (req, res) => {
+	const topGoals = getAggStat("1819", "goals", "Most Goals")
+	const topAssists = getAggStat("1819", "assists", "Most Assists")
+	const topYellow = getAggStat("1819", "yellow", "Most Yellow Cards")
+	const topRed = getAggStat("1819", "red", "Most Red Cards")
+	const topCS = getAggStat("1819", "cleanSheets", "Most Clean Sheets")
+
+	Promise.all([topGoals, topAssists, topYellow, topRed, topCS])
+		.then(topStats => {
+			res.send(topStats)
+		})
+		.catch(err => res.status(400))
+})
+
 // @route   GET api/players/name
 // @desc    Get player by name
 // @access  Public
 router.get("/:name", (req, res) => {
 	const name = req.params.name
-	//console.log(req.query, req.params)
 	Player.find({ name }, (err, player) => {
 		if (!err) {
 			res.send(player)
@@ -58,5 +74,34 @@ router.post("/add", (req, res) => {
 		.then(player => res.json(player))
 		.catch(err => console.log(err))
 })
+
+function getAggStat(season, statAttr, label) {
+	return new Promise((resolve, reject) => {
+		Player.aggregate(
+			[
+				{ $unwind: "$stats" },
+				{ $match: { "stats.season": season } },
+				{ $sort: { ["stats." + statAttr]: -1 } },
+				{
+					$project: {
+						number: 1,
+						name: 1,
+						statName: label,
+						statNumber: "$stats." + statAttr,
+						_id: 0
+					}
+				},
+				{ $limit: 1 }
+			],
+			(err, player) => {
+				if (!err) {
+					resolve(player[0])
+				} else {
+					reject(err)
+				}
+			}
+		)
+	})
+}
 
 module.exports = router
