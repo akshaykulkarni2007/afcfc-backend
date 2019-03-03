@@ -86,6 +86,7 @@ function getAggStat(season, statAttr, label) {
 					$project: {
 						number: 1,
 						name: 1,
+						dp: 1,
 						statName: label,
 						statNumber: "$stats." + statAttr,
 						_id: 0
