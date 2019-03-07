@@ -43,10 +43,24 @@ router.get("/topStats", (req, res) => {
 // @desc    Get player by name
 // @access  Public
 router.get("/:name", (req, res) => {
-	const name = req.params.name
-	Player.find({ name }, (err, player) => {
+	const dp = req.params.name
+	Player.find({ dp }, (err, player) => {
 		if (!err) {
 			res.send(player)
+		} else {
+			res.status(400)
+		}
+	})
+})
+
+// @route   PUT api/players/:id
+// @desc    Updates a player
+// @access  Admin
+router.put("/:name", (req, res) => {
+	const dp = req.body.dp
+	Player.findOneAndUpdate({ dp }, req.body, { new: true }, (err, data) => {
+		if (!err) {
+			res.send(data)
 		} else {
 			res.status(400)
 		}

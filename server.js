@@ -7,6 +7,7 @@ const cors = require("cors")
 // Routes
 const users = require("./routes/api/users")
 const players = require("./routes/api/players")
+const homeBanner = require("./routes/api/homeBanner")
 
 const app = express()
 
@@ -37,6 +38,7 @@ app.use(cors())
 // Use Routes
 app.use("/api/users", users)
 app.use("/api/players", players)
+app.use("/api/home-banner", homeBanner)
 
 const port = process.env.PORT || 5000
 
