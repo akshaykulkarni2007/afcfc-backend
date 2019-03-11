@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
+const path = require("path")
 const passport = require("passport")
 const cors = require("cors")
 
@@ -16,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Static dir
-app.use(express.static("public"))
+app.use(express.static(path.join(__dirname, "public")))
 
 // DB Config
 const db = require("./config/keys").mongoURI
