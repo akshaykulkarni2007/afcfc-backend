@@ -10,8 +10,8 @@ const HomeBanner = require("../../models/HomeBanner")
 router.get("/", (req, res) => {
 	HomeBanner.find({}, (err, data) => {
 		if (!err) {
-			//const { title, content } = data[0]
-			res.send(data)
+			const { title, content } = data[0]
+			res.send({ title, content })
 		} else {
 			res.status(400)
 		}
